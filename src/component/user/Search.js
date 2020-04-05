@@ -1,9 +1,15 @@
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 class Search extends Component {
   state = {
     text: "",
   };
+
+  static propTypes = {
+    searchUser : PropTypes.func.isRequired,
+    clearUser: PropTypes.func.isRequired
+  }
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +45,7 @@ class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        <button className='btn btn-light btn-block' onClick={this.props.clearUser}>Clear</button>
       </div>
     );
   }
