@@ -7,10 +7,12 @@ import Search from "./component/user/Search";
 import Alert from "./component/layout/Alert";
 import axios from "axios";
 import About from "./component/pages/About";
+import User from "./component/user/User"
 
 class App extends Component {
   state = {
     users: [],
+    user: {},
     loading: false,
     alert: null,
   };
@@ -19,6 +21,14 @@ class App extends Component {
     // this.setState({ loading: true });
     // const res = await axios.get("http://api.github.com/users");
     // this.setState({ users: res.data, loading: false });
+  }
+
+  getUser = async (userName) => {
+    this.setState({ loading: true });
+
+    const res = await axios.get(`http://api.github.com/users/${userName}`);
+
+    this.setState({ user: res.data, loading: false });
   }
 
   searchUser = async (text) => {
@@ -80,6 +90,13 @@ class App extends Component {
                 exact
                 path='/about'
                 component={About}
+              />
+              <Route
+                exact
+                path= '/user/:login'
+                render={props => (
+                  <User {...props} user={this.state.user} getUser={this.getUser} loading={this.state.loading} />
+                )}
               />
             </Switch>
           </div>
