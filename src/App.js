@@ -6,6 +6,7 @@ import Users from "./component/user/Users";
 import Search from "./component/user/Search";
 import Alert from "./component/layout/Alert";
 import axios from "axios";
+import About from "./component/pages/About";
 
 class App extends Component {
   state = {
@@ -74,6 +75,11 @@ class App extends Component {
                     />
                   </Fragment>
                 )}
+              />
+              <Route
+                exact
+                path='/about'
+                component={About}
               />
             </Switch>
           </div>
